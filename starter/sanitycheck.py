@@ -1,3 +1,3 @@
 # sanity check
 def addition():
-    return 2+2
+    assert 2+2 == 4
