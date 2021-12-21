@@ -25,9 +25,7 @@ jobs:
           aws-region: us-east-1
       - name: Run Flake8
         run: flake8
-      - name: Run pytest
-        run: python -m pytest -vv
-
-        
-        
-     
+      - name:  Run pytest
+        working-directory: ./starter
+        run: |
+          pytest -s
