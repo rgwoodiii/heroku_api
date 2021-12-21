@@ -17,6 +17,8 @@ jobs:
           python-version: 3.7.12 
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Run pytest
+        run: pytest
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -25,10 +27,6 @@ jobs:
           aws-region: us-east-1
       - name: Run Flake8
         run: flake8
-      - name:  Run pytest
-        working-directory: ./starter/sanitycheck.py
-        run: |
-          pytest -s
       - name: Setup DVC
         uses: iterative/setup-dvc@v1
       - name: Pull data from DVC
