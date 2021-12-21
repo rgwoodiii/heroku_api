@@ -26,6 +26,10 @@ jobs:
       - name: Run Flake8
         run: flake8
       - name:  Run pytest
-        working-directory: ./starter
+        working-directory: ./starter/sanitycheck.py
         run: |
           pytest -s
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+      - name: Pull data from DVC
+        run: dvc pull data 
