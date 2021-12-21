@@ -1,5 +1,3 @@
 # sanity check
-import pytest
-
-def test_capital_case():
+def test_addition():
     assert 2+2 == 4
