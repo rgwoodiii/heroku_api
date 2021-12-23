@@ -24,11 +24,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Setup DVC
-        run: pip install -r requirements.txt
+        uses: iterative/setup-dvc@v1
       - name: Pull data from DVC
-        run: pip install -r requirements.txt
+        run: dvc pull data -R
       - name: Run Flake8
-        run: pip install -r requirements.txt
+        run: flake8
       - name: Run pytest
-        run: pip install -r requirements.txt
-        
+        run: pytest
