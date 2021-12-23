@@ -30,7 +30,7 @@ async def greet_user():
 
 
 # greet with name
-@app.get("/{name}")
+@app.get("/welcome/{name}")
 async def get_name(name: str):
     return {f"Hi {name}, Welcome to this app"}
 
