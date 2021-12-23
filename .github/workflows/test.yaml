@@ -27,5 +27,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Pull data from DVC
         uses: actions/checkout@v2
+      - name: Run Flake8
+        run: actions/checkout@v2
       - name: Run pytest
         uses: actions/checkout@v2
+        
