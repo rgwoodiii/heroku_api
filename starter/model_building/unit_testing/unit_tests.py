@@ -18,7 +18,7 @@ import logging
 
 ## load data
 @pytest.fixture()
-def data():
+def df():
     df = pd.read_csv(os.path.join(root_dir, "data", "census_no_spaces.csv"))
     return df
 
