@@ -11,6 +11,7 @@ from sklearn.metrics import precision_score, recall_score, fbeta_score
 import json
 from joblib import load
 
+df = pd.read_csv("../data/census_cleaned.csv")
 
 def train_test_model(data = None):
     """
@@ -87,7 +88,7 @@ def save_model(data = None):
     # save model
     dump(model, "trainedmodel.pkl")
     
-def inference(data = None):
+def inference(df):
     """ Run model inferences and return the predictions.
 
     Inputs
@@ -101,12 +102,6 @@ def inference(data = None):
     preds : np.array
         Predictions from the model.
     """
-    # load data
-    if data is None:
-        df = pd.read_csv("../data/census_cleaned.csv")
-    else:
-        df = data
-    
     # load model
     model = load("trainedmodel.pkl")
     
@@ -120,7 +115,7 @@ def inference(data = None):
     return pred, y 
 
 
-def compute_model_metrics(pred, y):
+def compute_model_metrics(pred, y_test):
     """
     Validates the trained machine learning model using precision, recall, and F1.
 
@@ -135,13 +130,13 @@ def compute_model_metrics(pred, y):
     recall : float
     fbeta : float
     """
-    fbeta = fbeta_score(y, pred, average='weighted', beta=0.5)
-    precision = precision_score(y, pred, average = None)
-    recall = recall_score(y, pred, average = None)
+    fbeta = fbeta_score(y_test, pred, average='weighted', beta=0.5)
+    precision = precision_score(y_test, pred, average = None)
+    recall = recall_score(y_test, pred, average = None)
     
     return precision, recall, fbeta
 
 if __name__ == "__main__":
-        train_test_model()
-        pred, y = inference()  
-        compute_model_metrics(pred, y)
+        train_test_model(df)
+        pred, y_test = inference(df)  
+        compute_model_metrics(pred, y_test)
