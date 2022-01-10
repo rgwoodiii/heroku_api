@@ -1,14 +1,11 @@
 # Put the code for your API here.
-import numpy as np
 import pandas as pd
 import os
 from fastapi import FastAPI
-from typing import Union, List
 from pydantic import BaseModel, Field
 import uvicorn
 from joblib import load
 import os.path
-import sys
 
 # load model
 model = load("starter/model_building/trainedmodel.pkl")
@@ -22,7 +19,7 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
     if os.system("dvc pull") != 0:
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
-    
+  
 # greeting
 @app.get("/")
 async def greet_user():
