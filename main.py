@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 import uvicorn
 from joblib import load
 import os.path
-from import inference
+from starter.model_building.training import inference
 
 # load model
 model = load("starter/model_building/trainedmodel.pkl")
@@ -72,6 +72,7 @@ class ClassifierFeatureIn(BaseModel):
                                 alias="native-country")
 
 
+        
 @app.post("/predict")
 def predict(data1: ClassifierFeatureIn):
     df = pd.read_csv('../data/census_cleaned.csv')
@@ -81,12 +82,14 @@ def predict(data1: ClassifierFeatureIn):
         "prediction": preds[0]
     }
 
+
 """
 # pydantic output of the model
 class ClassifierOut(BaseModel):
     # The forecast output will be either >50K or <50K
     forecast: str = "Income <=50k"
-"""    
-    
+"""   
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
