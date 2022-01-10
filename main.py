@@ -36,43 +36,42 @@ async def get_name(name: str):
 
 # models with pydantic
 class ClassifierFeatureIn(BaseModel):
-    age: int = Field(..., 
+    age: int = Field(...,
                      example=50)
-    workclass: str = Field(..., 
+    workclass: str = Field(...,
                            example="State-gov")
-    fnlgt: int = Field(..., 
+    fnlgt: int = Field(...,
                        example=77516)
-    education: str = Field(..., 
+    education: str = Field(...,
                            example="Bachelors")
-    education_num: int = Field(..., 
-                               example=13, 
+    education_num: int = Field(...,
+                               example=13,
                                alias="education-num")
-    marital_status: str = Field(..., 
-                                example="Never-married", 
+    marital_status: str = Field(...,
+                                example="Never-married",
                                 alias="marital-status")
-    occupation: str = Field(..., 
+    occupation: str = Field(...,
                             example="Adm-clerical")
-    relationship: str = Field(..., 
+    relationship: str = Field(...,
                               example="Not-in-family")
-    race: str = Field(..., 
+    race: str = Field(...,
                       example="White")
-    sex: str = Field(..., 
+    sex: str = Field(...,
                      example="Male")
-    capital_gain: int = Field(..., 
-                              example=2500, 
+    capital_gain: int = Field(...,
+                              example=2500,
                               alias="capital-gain")
-    capital_loss: int = Field(..., 
-                              example=0, 
+    capital_loss: int = Field(...,
+                              example=0,
                               alias="capital-loss")
-    hours_per_week: int = Field(..., 
-                                example=40, 
+    hours_per_week: int = Field(...,
+                                example=40,
                                 alias="hours-per-week")
-    native_country: str = Field(..., 
-                                example="United-States", 
+    native_country: str = Field(...,
+                                example="United-States",
                                 alias="native-country")
 
 
-        
 @app.post("/predict")
 def predict(data1: ClassifierFeatureIn):
     df = pd.read_csv('../data/census_cleaned.csv')
@@ -88,8 +87,7 @@ def predict(data1: ClassifierFeatureIn):
 class ClassifierOut(BaseModel):
     # The forecast output will be either >50K or <50K
     forecast: str = "Income <=50k"
-"""   
-
+"""
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
