@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 import uvicorn
 from joblib import load
 import os.path
+from import inference
 
 # load model
 model = load("starter/model_building/trainedmodel.pkl")
@@ -19,7 +20,8 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
     if os.system("dvc pull") != 0:
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
-  
+
+
 # greeting
 @app.get("/")
 async def greet_user():
@@ -34,20 +36,40 @@ async def get_name(name: str):
 
 # models with pydantic
 class ClassifierFeatureIn(BaseModel):
-    age: int = Field(..., example=50)
-    workclass: str = Field(..., example="State-gov")
-    fnlgt: int = Field(..., example=77516)
-    education: str = Field(..., example="Bachelors")
-    education_num: int = Field(..., example=13, alias="education-num")
-    marital_status: str = Field(..., example="Never-married", alias="marital-status")
-    occupation: str = Field(..., example="Adm-clerical")
-    relationship: str = Field(..., example="Not-in-family")
-    race: str = Field(..., example="White")
-    sex: str = Field(..., example="Male")
-    capital_gain: int = Field(..., example=2500, alias="capital-gain")
-    capital_loss: int = Field(..., example=0, alias="capital-loss")
-    hours_per_week: int = Field(..., example=40, alias="hours-per-week")
-    native_country: str = Field(..., example="United-States", alias="native-country")
+    age: int = Field(..., 
+                     example=50)
+    workclass: str = Field(..., 
+                           example="State-gov")
+    fnlgt: int = Field(..., 
+                       example=77516)
+    education: str = Field(..., 
+                           example="Bachelors")
+    education_num: int = Field(..., 
+                               example=13, 
+                               alias="education-num")
+    marital_status: str = Field(..., 
+                                example="Never-married", 
+                                alias="marital-status")
+    occupation: str = Field(..., 
+                            example="Adm-clerical")
+    relationship: str = Field(..., 
+                              example="Not-in-family")
+    race: str = Field(..., 
+                      example="White")
+    sex: str = Field(..., 
+                     example="Male")
+    capital_gain: int = Field(..., 
+                              example=2500, 
+                              alias="capital-gain")
+    capital_loss: int = Field(..., 
+                              example=0, 
+                              alias="capital-loss")
+    hours_per_week: int = Field(..., 
+                                example=40, 
+                                alias="hours-per-week")
+    native_country: str = Field(..., 
+                                example="United-States", 
+                                alias="native-country")
 
 
 @app.post("/predict")
