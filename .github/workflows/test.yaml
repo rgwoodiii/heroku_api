@@ -26,7 +26,7 @@ jobs:
       - name: Setup DVC
         uses: iterative/setup-dvc@v1
       - name: Pull data from DVC
-        run: dvc pull
+        run: dvc remote add -d s3-bucket s3://uda3/storage
       - name: Run Flake8
         run: flake8
       - name: Run pytest
