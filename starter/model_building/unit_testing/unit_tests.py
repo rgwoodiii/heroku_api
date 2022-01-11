@@ -1,18 +1,11 @@
 # load libraries
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from joblib import dump
-import numpy as np
-import pickle
 import os
-from sklearn import metrics
 from sklearn.metrics import precision_score, recall_score, fbeta_score
-import json
 from joblib import load
 import pytest
 import os.path
-import logging
 
 # functions
 
