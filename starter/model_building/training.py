@@ -67,7 +67,7 @@ def save_model(data=None):
     x = df.drop(['salary'], axis=1)
     x = pd.get_dummies(x)
     y = df['salary']
-    
+
     # train/test split
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20)
     # model
