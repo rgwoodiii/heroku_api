@@ -78,7 +78,7 @@ def predict(data1: ClassifierFeatureIn):
     # predict
     pred, y = inference(df)
     return {
-        "prediction": preds[0]
+        "prediction": pred[0]
     }
 
 

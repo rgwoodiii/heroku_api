@@ -13,7 +13,7 @@ import pytest
 
 @pytest.fixture()
 def df():
-    df = pd.read_csv("../data/census_no_spaces.csv"))
+    df = pd.read_csv("../data/census_no_spaces.csv")
     return df
 
 # data
