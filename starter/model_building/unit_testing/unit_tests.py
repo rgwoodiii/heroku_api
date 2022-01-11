@@ -1,7 +1,6 @@
 # load libraries
 import pandas as pd
 from sklearn.model_selection import train_test_split
-import os
 from sklearn.metrics import precision_score, recall_score, fbeta_score
 from joblib import load
 import pytest
@@ -66,7 +65,8 @@ def test_inference(df):
 
     print(model.score(x, y))
 
-    assert pred.shape[0] == y.shape[0], "number of predictions are different from expected."
+    assert pred.shape[0] == y.shape[0], "number of predictions \
+    are different from expected."
 
 # metric review
 
