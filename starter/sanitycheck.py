@@ -61,9 +61,9 @@ def run_sanity_check(test_dir):
         for the GET() method.")
         print(
             FAIL_COLOR +
-            "\nPlease make sure you have a test case for the GET method.\
-            This MUST test both the status code as well as the contents \
-            of the request object.\n")
+            "\nPlease make sure you have a test case for the GET \
+            method. This MUST test both the status code as well as \
+            the contents of the request object.\n")
         SANITY_TEST_PASSING = False
 
     else:
@@ -87,8 +87,8 @@ def run_sanity_check(test_dir):
             WARNING_COUNT += 1
             print(
                 FAIL_COLOR +
-                "Your test case for GET() does not seem to be testing the \
-                CONTENTS of the response.\n")
+                "Your test case for GET() does not seem to be \
+                testing the CONTENTS of the response.\n")
 
     # POST()
     TEST_FOR_POST_METHOD_RESPONSE_CODE = False
@@ -98,12 +98,13 @@ def run_sanity_check(test_dir):
     if not test_functions_for_post:
         print(FAIL_COLOR + f"[{WARNING_COUNT}]")
         WARNING_COUNT += 1
-        print(FAIL_COLOR + "No test cases were detected for the POST() method.")
+        print(FAIL_COLOR + "No test cases were detected for the \
+        POST() method.")
         print(
             FAIL_COLOR +
-            "Please make sure you have TWO test cases for the POST() method." +
-            "\nOne test case for EACH of the possible inferences \
-            (results/outputs) of the ML model.\n")
+            "Please make sure you have TWO test cases for the POST()\
+            method." + "\nOne test case for EACH of the possible \
+            inferences (results/outputs) of the ML model.\n")
         SANITY_TEST_PASSING = False
     else:
         if len(test_functions_for_post) == 1:
@@ -114,7 +115,8 @@ def run_sanity_check(test_dir):
                 "Only one test case was detected for the POST() method.")
             print(
                 FAIL_COLOR +
-                "Please make sure you have two test cases for the POST() method." +
+                "Please make sure you have two test cases for the POST() \
+                method." +
                 "\nOne test case for EACH of the possible \
                 inferences (results/outputs) of the ML model.\n")
             SANITY_TEST_PASSING = False
