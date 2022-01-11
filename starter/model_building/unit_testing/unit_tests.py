@@ -5,8 +5,6 @@ import os
 from sklearn.metrics import precision_score, recall_score, fbeta_score
 from joblib import load
 import pytest
-import os.path
-import root
 
 # functions
 
@@ -15,7 +13,7 @@ import root
 
 @pytest.fixture()
 def df():
-    df = pd.read_csv(os.path.join(root_dir, "data", "census_no_spaces.csv"))
+    df = pd.read_csv("../data/census_no_spaces.csv"))
     return df
 
 # data
@@ -29,12 +27,14 @@ def test_data_shape(df):
 
 
 def test_slice_averages(df):
-    """ Test to see if our mean per categorical slice is in the range 1.5 to 2.5."""
+    """ Test to see if our mean per categorical slice \
+    is in the range 1.5 to 2.5."""
     for cat_feat in df["workclass"].unique():
         avg_value = df[df["workclass"] == cat_feat]["hours-per-week"].mean()
         assert (
             49 > avg_value > 28
-        ), f"For {cat_feat}, average of {avg_value} not between 40 and 28"
+        ), "For {cat_feat}, average of {avg_value} not \
+        between 40 and 28"
 
 # model
 
