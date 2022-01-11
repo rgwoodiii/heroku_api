@@ -109,7 +109,8 @@ def inference(df):
 
 def compute_model_metrics(pred, y_test):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using\
+    precision, recall, and F1.
 
     Inputs
     ------
