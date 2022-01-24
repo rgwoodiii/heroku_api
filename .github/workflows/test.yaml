@@ -30,4 +30,5 @@ jobs:
       - name: Run Flake8
         run: flake8 --max-line-length=100 
       - name: Run pytest
-        run: pytest
+        run: pytest starter/model_building/unit_testing/unit_tests.py
+
