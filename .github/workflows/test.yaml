@@ -28,6 +28,6 @@ jobs:
       - name: Pull data from DVC
         run: dvc remote add -d s3-bucket s3://uda3/storage
       - name: Run Flake8
-        run: flake8
+        run: flake8 --max-line-length=100 
       - name: Run pytest
         run: pytest
