@@ -11,25 +11,25 @@ import pytest
 
 
 @pytest.fixture()
-def df():
-    df = pd.read_csv("../../data/census_no_spaces.csv")
-    return df
+def data():
+    data = pd.read_csv("../../data/census_cleaned.csv")
+    return data
 
 # data
 
 
-def test_data_shape(df):
+def test_data_shape(data):
     """ If your data is assumed to have no null \
     values then this is a valid test. """
-    assert df.shape == df.dropna().shape, "Dropping \
+    assert data.shape == data.dropna().shape, "Dropping \
     null changes shape."
 
 
-def test_slice_averages(df):
+def test_slice_averages(data):
     """ Test to see if our mean per categorical slice \
     is in the range 1.5 to 2.5."""
-    for cat_feat in df["workclass"].unique():
-        avg_value = df[df["workclass"] == cat_feat]["hours-per-week"].mean()
+    for cat_feat in data["workclass"].unique():
+        avg_value = data[data["workclass"] == cat_feat]["hours-per-week"].mean()
         assert (
             49 > avg_value > 28
         ), "For {cat_feat}, average of {avg_value} not \
@@ -38,11 +38,11 @@ def test_slice_averages(df):
 # model
 
 
-def test_perf(df):
+def test_perf(data):
     # separate target
-    x = df.drop(['salary'], axis=1)
+    x = data.drop(['salary'], axis=1)
     x = pd.get_dummies(x)
-    y = df['salary']
+    y = data['salary']
 
     # train/test split
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20)
@@ -53,11 +53,11 @@ def test_perf(df):
     assert model.score(x_test, y_test) >= .8, "score is lower than expected."
 
 
-def test_inference(df):
+def test_inference(data):
     # separate target
-    x = df.drop(['salary'], axis=1)
+    x = data.drop(['salary'], axis=1)
     x = pd.get_dummies(x)
-    y = df['salary']
+    y = data['salary']
     # model
     model = load("trainedmodel.pkl")
     # predict
@@ -71,10 +71,10 @@ def test_inference(df):
 # metric review
 
 
-def test_compute_model_metrics(df):
-    x = df.drop(['salary'], axis=1)
+def test_compute_model_metrics(data):
+    x = data.drop(['salary'], axis=1)
     x = pd.get_dummies(x)
-    y = df['salary']
+    y = data['salary']
     # model
     model = load("trainedmodel.pkl")
     # predict
